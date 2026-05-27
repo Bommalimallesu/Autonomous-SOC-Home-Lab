@@ -20,93 +20,77 @@ This repository contains a modular, virtualized Security Operations Center (SOC)
 [**Read the full Architecture Design**](docs/architecture/system-design.md)
 
 ```mermaid
-flowchart TB
+flowchart LR
 
     %% =========================
     %% ATTACK LAYER
     %% =========================
-    subgraph ATTACK["🛑 Attack Simulation Layer"]
-        A["Kali Linux Attacker"]
-    end
+    A["🛑 Kali Linux Attacker<br>IP: 192.168.100.200"]
 
     %% =========================
-    %% ENDPOINT LAYER
+    %% ENDPOINT
     %% =========================
-    subgraph ENDPOINT["💻 Endpoint Monitoring Layer"]
-        B["Windows 10 Endpoint"]
-        C["Sysmon + Wazuh Agent"]
-    end
+    B["💻 Windows 10 Victim<br>IP: 192.168.100.50"]
+
+    C["📡 Sysmon + Wazuh Agent"]
 
     %% =========================
-    %% SIEM LAYER
+    %% SIEM
     %% =========================
-    subgraph SIEM["🛡️ SIEM & Detection Layer"]
-        D["Wazuh SIEM Manager"]
-        E["Custom Detection Rules"]
-        F["Critical Security Alert"]
-    end
+    D["🛡️ Wazuh SIEM Manager<br>IP: 192.168.100.100"]
+
+    E["🚨 Detection Rule Engine<br>MITRE ATT&CK Mapping"]
+
+    F["⚠️ Critical Alert<br>Rule ID: 100089"]
 
     %% =========================
-    %% AUTOMATION LAYER
+    %% SOAR
     %% =========================
-    subgraph SOAR["⚙️ SOAR Automation Layer"]
-        G["Shuffle SOAR"]
-        H["Webhook Automation"]
-    end
+    G["⚙️ Shuffle SOAR<br>Automation Engine"]
 
     %% =========================
-    %% INCIDENT RESPONSE
+    %% ITSM
     %% =========================
-    subgraph IR["📋 Incident Response Layer"]
-        I["ServiceNow Incident"]
-    end
+    H["📋 ServiceNow<br>Incident Ticket"]
 
     %% =========================
     %% INFRASTRUCTURE
     %% =========================
-    subgraph INFRA["🔐 SOC Infrastructure"]
-        J["pfSense Firewall"]
-        K["Windows Server 2022 AD"]
+    subgraph NETWORK["🔐 SOC Lab Network"]
+        I["🔥 pfSense Firewall<br>IP: 192.168.100.1"]
+        J["🖥️ Windows Server 2022 AD<br>IP: 192.168.100.2"]
     end
 
     %% =========================
-    %% ATTACK FLOW
+    %% FLOW
     %% =========================
-    A -->|"RDP Brute Force"| B
+    A -->|"RDP Brute Force<br>T1110"| B
 
-    %% =========================
-    %% TELEMETRY FLOW
-    %% =========================
     B --> C
-    C -->|"Event ID 4625"| D
 
-    %% =========================
-    %% DETECTION FLOW
-    %% =========================
+    C -->|"Event ID 4625<br>TCP 1514"| D
+
     D --> E
+
     E --> F
 
-    %% =========================
-    %% AUTOMATION FLOW
-    %% =========================
     F -->|"HTTPS Webhook"| G
-    G --> H
-    H -->|"REST API"| I
+
+    G -->|"REST API"| H
 
     %% =========================
-    %% STYLING
+    %% COLORS
     %% =========================
-    style A fill:#ff4d4d,color:#ffffff,stroke:#ffffff
+    style A fill:#ef4444,color:#ffffff,stroke:#ffffff
     style B fill:#1f2937,color:#ffffff,stroke:#ffffff
     style C fill:#2563eb,color:#ffffff,stroke:#ffffff
-    style D fill:#4da6ff,color:#ffffff,stroke:#ffffff
+    style D fill:#0ea5e9,color:#ffffff,stroke:#ffffff
     style E fill:#7c3aed,color:#ffffff,stroke:#ffffff
-    style F fill:#ffcc00,color:#000000,stroke:#333333
+    style F fill:#facc15,color:#000000,stroke:#333333
     style G fill:#9333ea,color:#ffffff,stroke:#ffffff
-    style H fill:#6366f1,color:#ffffff,stroke:#ffffff
-    style I fill:#00cc88,color:#ffffff,stroke:#ffffff
-    style J fill:#f97316,color:#ffffff,stroke:#ffffff
-    style K fill:#374151,color:#ffffff,stroke:#ffffff
+    style H fill:#10b981,color:#ffffff,stroke:#ffffff
+    style I fill:#f97316,color:#ffffff,stroke:#ffffff
+    style J fill:#374151,color:#ffffff,stroke:#ffffff
 ```
 📋 Prerequisites
 
