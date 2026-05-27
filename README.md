@@ -248,10 +248,19 @@ Autonomous-SOC-Home-Lab/
     └── integration/
         └── e2e-test.sh
 ```
-🔄 Detection & Response Workflow
+## 🔄 Detection Workflow Summary
 
-Kali Linux Attack → Windows Event ID 4625 → Wazuh Detection 
-→ Shuffle SOAR Webhook → Automated ServiceNow Incident
+```text
+Kali Linux Attack
+        ↓
+Windows Event ID 4625
+        ↓
+Wazuh Detection Engine
+        ↓
+Shuffle SOAR Automation
+        ↓
+Automated ServiceNow Incident
+```
 
 🧠 Skills Demonstrated
 
