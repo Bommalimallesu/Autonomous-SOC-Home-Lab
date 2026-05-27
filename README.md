@@ -92,13 +92,14 @@ flowchart LR
     style I fill:#f97316,color:#ffffff,stroke:#ffffff
     style J fill:#374151,color:#ffffff,stroke:#ffffff
 ```
-📋 Prerequisites
+## 📋 Prerequisites
 
 Before deploying the lab, ensure your host environment meets these requirements:
-1. Memory: 16GB+ RAM (Recommended for 4-5 concurrent VMs).
-2. Storage: 100GB+ free SSD space.
-3. Hypervisor: VMware Workstation Pro/Player or VirtualBox.
-4. Network: Ability to create custom Host-Only network adapters.
+
+- Memory: 16GB+ RAM (Recommended for 4–5 concurrent VMs)
+- Storage: 100GB+ Free SSD Space
+- Hypervisor: VMware Workstation Pro/Player or VirtualBox
+- Network: Support for Custom Host-Only Network Adapters
 
 🚀 Getting Started
 
