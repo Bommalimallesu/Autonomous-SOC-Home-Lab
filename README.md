@@ -201,7 +201,3 @@ Kali Linux Attack → Windows Event ID 4625 → Wazuh Detection
 📅 Last Updated: May 26, 2026
 
 This laboratory environment demonstrates real-world enterprise SOC capabilities with production-grade standards and security best practices.
-=======
-# Autonomous-SOC-Home-Lab
-Production-grade SOC lab featuring Wazuh SIEM, Shuffle SOAR, and ServiceNow integration. Includes automated incident response playbooks, Active Directory deployment via IaC, and end-to-end telemetry pipeline documentation.
->>>>>>> 43e178192bb0712a9f2ad4eb6cc7fd3d230f2001
