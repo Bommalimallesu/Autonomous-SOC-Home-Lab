@@ -19,30 +19,26 @@ This repository contains a modular, virtualized Security Operations Center (SOC)
 
 [**Read the full Architecture Design**](docs/architecture/system-design.md)
 
-```mermaid
 flowchart TD
 
     %% Attack Layer
-    A["Kali Linux Attacker<br>192.168.100.200"]
-    -->|"RDP Brute Force Attack - MITRE ATT&CK T1110"|
-    B["Windows 10 Victim Endpoint<br>192.168.100.50<br>Sysmon + Wazuh Agent"]
+    A["Kali Linux Attacker 192.168.100.200"]
+    -->|"RDP Brute Force Attack - MITRE ATTACK T1110"|
+    B["Windows 10 Victim Endpoint 192.168.100.50"]
 
     %% Telemetry Flow
-    B -->|"Security Event ID 4625 + Sysmon Telemetry"| C["Wazuh Agent"]
-
-    C -->|"Secure Forwarding TCP 1514"| D["Wazuh SIEM Manager<br>192.168.100.100"]
-
-    D -->|"Custom Correlation Rules"| E["Level 10 Critical Alert<br>Rule 100089"]
+    B -->|"Security Event ID 4625"| C["Wazuh Agent"]
+    C -->|"Secure Forwarding TCP 1514"| D["Wazuh SIEM Manager 192.168.100.100"]
+    D -->|"Custom Correlation Rules"| E["Level 10 Critical Alert"]
 
     %% Automation Flow
-    E -->|"HTTPS Webhook"| F["Shuffle SOAR<br>Automation Engine"]
-
-    F -->|"REST API Call"| G["ServiceNow ITSM<br>Automated Incident Creation"]
+    E -->|"HTTPS Webhook"| F["Shuffle SOAR Automation Engine"]
+    F -->|"REST API Call"| G["ServiceNow ITSM Incident"]
 
     %% Infrastructure
-    subgraph "Isolated Lab Network - 192.168.100.0/24"
-        H["pfSense Firewall<br>192.168.100.1"]
-        I["Windows Server 2022 DC + AD<br>192.168.100.2"]
+    subgraph Lab["Isolated Lab Network - 192.168.100.0/24"]
+        H["pfSense Firewall"]
+        I["Windows Server 2022 DC"]
     end
 
     %% Styling
@@ -50,7 +46,6 @@ flowchart TD
     style D fill:#4da6ff,stroke:#ffffff,color:#ffffff
     style E fill:#ffcc00,stroke:#333333,color:#000000
     style G fill:#00cc88,stroke:#ffffff,color:#ffffff
-```
 📋 Prerequisites
 
 Before deploying the lab, ensure your host environment meets these requirements:
