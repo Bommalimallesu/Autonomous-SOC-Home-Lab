@@ -54,18 +54,18 @@ cd Autonomous SOC Home Lab
 
 2. Environment Configuration (Security)
 
-# Create your local environment file from the template
+#Create your local environment file from the template
 cp config/servicenow/.env.example config/servicenow/.env
 
-# Edit .env with your actual API credentials.
-# WARNING: Ensure .env is added to your .gitignore. Never push this file!
+#Edit .env with your actual API credentials.
+#WARNING: Ensure .env is added to your .gitignore. Never push this file!
 
 3. Execution & Deployment
 
-# Make the deployment script executable
+#Make the deployment script executable
 chmod +x scripts/automation/deploy-wazuh.sh
 
-# Run the deployment
+#Run the deployment
 sudo bash scripts/automation/deploy-wazuh.sh
 
 🚀 Key Features
@@ -99,21 +99,22 @@ We prioritize high-fidelity alerting through a standardized, automated pipeline:
 | **Network** | pfSense | Perimeter Security & Segmentation |
 | **Telemetry** | Sysmon | Advanced Windows Monitoring |
 
-📁 Project Structure
+## 📁 Project Structure
 
-Autonomous SOC Home Lab/
-├── README.md                   # Project overview and entry point
-├── CHANGELOG.md                # Version history and updates
-├── CONTRIBUTING.md             # Guidelines for contributors
-├── LICENSE                     # MIT License
-├── .gitignore                  # Files to exclude (e.g., .env, .DS_Store)
+```text
+Autonomous-SOC-Home-Lab/
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── .gitignore
 │
-├── screenshots/                # Documentation assets for your README
+├── screenshots/
 │   ├── wazuh-dashboard.png
 │   ├── shuffle-workflow.png
 │   └── servicenow-incident.png
 │
-├── docs/                       # Detailed operational documentation
+├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── SETUP.md
 │   ├── TROUBLESHOOTING.md
@@ -129,7 +130,7 @@ Autonomous SOC Home Lab/
 │       ├── common-issues.md
 │       └── solutions.md
 │
-├── config/                     # Modular configuration files
+├── config/
 │   ├── wazuh/
 │   │   ├── ossec.conf
 │   │   ├── rules-custom.xml
@@ -141,7 +142,7 @@ Autonomous SOC Home Lab/
 │   └── servicenow/
 │       └── incident-template.json
 │
-├── scripts/                    # Automation and integration logic
+├── scripts/
 │   ├── integration/
 │   │   ├── custom-shuffle.py
 │   │   └── servicenow-api.py
@@ -152,7 +153,7 @@ Autonomous SOC Home Lab/
 │       ├── test-webhook.sh
 │       └── test-integration.py
 │
-├── diagrams/                   # Mermaid code for architecture/flow
+├── diagrams/
 │   ├── architecture/
 │   │   ├── system-overview.txt
 │   │   └── data-flow.txt
@@ -161,7 +162,7 @@ Autonomous SOC Home Lab/
 │   └── workflow/
 │       └── soar-workflow.txt
 │
-├── examples/                   # Sample payloads for validation
+├── examples/
 │   ├── alerts/
 │   │   └── sample-alert.json
 │   ├── incidents/
@@ -169,10 +170,10 @@ Autonomous SOC Home Lab/
 │   └── logs/
 │       └── sample-logs.txt
 │
-└── tests/                      # Automated validation suites
+└── tests/
     └── integration/
         └── e2e-test.sh
-
+```
 🔄 Detection & Response Workflow
 
 Kali Linux Attack → Windows Event ID 4625 → Wazuh Detection 
