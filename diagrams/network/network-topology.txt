@@ -1,0 +1,108 @@
+192.168.100.0/24 Subnet Network Topology Map Structure Layout
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                              INTERNET / ISP                                 │
+└───────────────────────────────┬──────────────────────────────────────────────┘
+                                │
+                                │
+                    ┌───────────▼───────────┐
+                    │     HOST MACHINE      │
+                    │  VMware Workstation   │
+                    │   Windows Host OS     │
+                    └───────────┬───────────┘
+                                │
+                                │
+        ┌───────────────────────▼────────────────────────┐
+        │            VMware Virtual Network Editor       │
+        │------------------------------------------------│
+        │ VMnet1  : Host-Only Network                    │
+        │ Network : 192.168.100.0/24                     │
+        │ DHCP    : Disabled                             │
+        │ Purpose : Internal SOC Lab Network             │
+        └───────────────────────┬────────────────────────┘
+                                │
+                                │
+                ┌───────────────▼────────────────┐
+                │         pfSense Firewall        │
+                │---------------------------------│
+                │ WAN : NAT Adapter               │
+                │       (Internet Access)         │
+                │                                 │
+                │ LAN : 192.168.100.1/24          │
+                │ DHCP Server Enabled             │
+                │ Gateway & Network Security      │
+                └───────────────┬────────────────┘
+                                │
+      ┌─────────────────────────┼─────────────────────────┐
+      │                         │                         │
+      │                         │                         │
+┌─────▼─────┐           ┌───────▼───────┐         ┌──────▼──────┐
+│ Windows   │           │ Windows 10    │         │ Ubuntu       │
+│ Server DC │           │ Client System │         │ Wazuh SIEM   │
+│------------│          │----------------│         │---------------│
+│ AD DS      │          │ User Endpoint  │         │ SIEM Server   │
+│ DNS Server │          │ Log Source     │         │ Wazuh Manager │
+│ DHCP/Auth  │          │ Monitoring VM  │         │ Elastic Stack │
+│             │         │                │         │ SOC Dashboard │
+│ IP: .2     │          │ IP: .50        │         │ IP: .100      │
+└─────┬──────┘          └───────────────┘         └──────┬───────┘
+      │                                                   │
+      │                                                   │
+      └──────────────────────┬────────────────────────────┘
+                             │
+                     ┌───────▼────────┐
+                     │ Kali Linux VM  │
+                     │----------------│
+                     │ Attacker Node  │
+                     │ Red Team VM    │
+                     │ Penetration VM │
+                     │ IP: .200       │
+                     └────────────────┘
+
+
+===============================================================================
+                    SOC HOME LAB NETWORK INFORMATION
+===============================================================================
+
+Network Range     : 192.168.100.0/24
+Gateway           : 192.168.100.1
+Firewall          : pfSense
+Virtualization    : VMware Workstation
+Isolation Type    : Host-Only Internal Lab
+Internet Access   : NAT via pfSense WAN
+
+===============================================================================
+                            DEVICE IP ALLOCATION
+===============================================================================
+
++------------------------+-------------------+-------------------------------+
+| DEVICE                 | IP ADDRESS        | ROLE                          |
++------------------------+-------------------+-------------------------------+
+| pfSense LAN            | 192.168.100.1     | Gateway / Firewall            |
+| Windows Server DC      | 192.168.100.2     | AD DS / DNS / Authentication  |
+| Windows 10 Client      | 192.168.100.50    | User Endpoint / Log Source    |
+| Ubuntu Wazuh SIEM      | 192.168.100.100   | SIEM / SOC Monitoring         |
+| Kali Linux Attacker    | 192.168.100.200   | Attack Simulation             |
++------------------------+-------------------+-------------------------------+
+
+===============================================================================
+                          SECURITY MONITORING FLOW
+===============================================================================
+
+[Kali Attacker]
+        │
+        ▼
+[Windows 10 Victim / Domain Environment]
+        │
+        ▼
+[Wazuh Agent Collects Logs]
+        │
+        ▼
+[Ubuntu Wazuh SIEM]
+        │
+        ▼
+[Alert Detection & Correlation]
+        │
+        ▼
+[SOAR / Incident Response / ServiceNow]
+
+===============================================================================

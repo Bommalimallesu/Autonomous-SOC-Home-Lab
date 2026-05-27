@@ -1,0 +1,38 @@
+# Core Firewall Packet Filtering Rules Definitions
+================================================================================
+LAB pfSENSE FIREWALL RULE BASE DOCUMENTATION
+================================================================================
+Description: Active rule base for the isolated SOC Lab network segment.
+Network Segment: 192.168.100.0/24 (SOC_LAB_NET)
+Target Security Model: Explicit Allow / Default Deny (Least Privilege)
+================================================================================
+
+[SECTION 1: RULE BASE MATRIX]
+
+| ID | Source IP / Net       | Port | Destination IP         | Port | Protocol | Action | Purpose / Justification                                       |
+|----|-----------------------|------|------------------------|------|----------|--------|---------------------------------------------------------------|
+| 01 | 192.168.100.100       | Any  | WAN (Internet)         | 80   | TCP      | ALLOW  | Wazuh Manager: Package updates & vulnerability feed updates   |
+| 02 | 192.168.100.100       | Any  | WAN (Internet)         | 443  | TCP      | ALLOW  | Wazuh Manager: Secure updates & threat intel sync             |
+| 03 | 192.168.100.0/24      | Any  | 192.168.100.1          | 53   | UDP/TCP  | ALLOW  | All Hosts: Core DNS resolution via pfSense                   |
+| 04 | 192.168.100.50        | Any  | 192.168.100.100        | 1514 | TCP      | ALLOW  | Win10 Victim: Shipping security event logs to Wazuh Agent port|
+| 05 | 192.168.100.50        | Any  | 192.168.100.100        | 1515 | TCP      | ALLOW  | Win10 Victim: Wazuh Agent enrollment protocol                |
+| 06 | 192.168.100.200       | Any  | 192.168.100.50         | 3389 | TCP      | ALLOW  | Kali Attacker: RDP pipeline for simulating Brute Force attacks|
+| 07 | 192.168.100.100       | Any  | WAN (Shuffle SOAR Cloud| 443  | TCP      | ALLOW  | Wazuh Manager: Webhook trigger outbound to Shuffle API        |
+| 08 | 192.168.100.0/24      | Any  | Any                    | Any  | Any      | BLOCK  | DEFAULT DENY: Explicit block for all untracked inter-zone traffic |
+
+================================================================================
+[SECTION 2: NAT / PORT FORWARDING (IF APPLICABLE)]
+================================================================================
+* Note: Standard management interfaces (Wazuh Dashboard port 443, pfSense WebGUI) 
+  are strictly restricted to local administrative access and are not exposed 
+  externally to the WAN interface.
+
+================================================================================
+[SECTION 3: STRATEGIC JUSTIFICATION FOR HIRING MANAGERS]
+================================================================================
+- Network Isolation: The Kali Linux attacker node (192.168.100.200) is locked down 
+  via layer-3 rules to prevent any pivoting or lateral movement out of the lab network into 
+  home production zones[cite: 296, 388].
+- Controlled Egress: Absolute internet lockout is applied to the Windows 10 Victim 
+  and Domain Controller to prevent uncontrolled malware beaconing, tracking, or unexpected updates 
+  during live attack simulations[cite: 296].

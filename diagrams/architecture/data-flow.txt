@@ -1,0 +1,30 @@
+Event ID 4625 -> Wazuh Decoder Rule 100001 -> Shuffle API Node -> ServiceNow Incident Ticket
+================================================================================
+DETECTION ENGINEERING DATA FLOW ENGINE
+================================================================================
+
+[STAGE 1: INCIDENT GENERATION]
+ Kali Linux Attacker (192.168.100.200) initiates brute force attack against 
+ Windows 10 Target (192.168.100.150) via RDP.
+
+[STAGE 2: TELEMETRY COLLECTION]
+ Windows 10 Wazuh Agent captures events:
+ ---> Event ID 4625 (Logon Failure)
+ ---> Sysmon Event ID 1 (Process Creation) / ID 3 (Network Connection)
+
+[STAGE 3: SIEM TRANSPORT PIPELINE]
+ Secure TLS Tunnel (Port 1514) transmits logs from Win10 Agent -> Wazuh Manager (192.168.100.100).
+ Wazuh Engine parses logs into structured JSON format.
+
+[STAGE 4: CORRELATION ENGINE ANALYSIS]
+ Wazuh rule-set identifies anomalous brute-force pattern.
+ ---> Triggered: Level 10 Alert (Critical).
+
+[STAGE 5: ORCHESTRATION & RESPONSE (SOAR)]
+ Wazuh triggers automated webhook payload to Shuffle SOAR.
+ ---> Shuffle processes workflow: Block source IP via Firewall / Isolate Host.
+
+[STAGE 6: INCIDENT MANAGEMENT (ITSM)]
+ Shuffle SOAR executes API call to ServiceNow.
+ ---> Incident ticket automatically created with enriched telemetry & threat context.
+================================================================================

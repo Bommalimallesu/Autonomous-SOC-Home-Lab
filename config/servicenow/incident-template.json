@@ -1,0 +1,9 @@
+
+{
+  "short_description": "Wazuh Alert: {{.rule.description}}",
+  "description": "Security alert triggered on endpoint. Details: Rule ID: {{.rule.id}}, Severity Level: {{.rule.level}}, Full Log: {{.full_log}}",
+  "impact": "2",
+  "urgency": "2",
+  "category": "security",
+  "assignment_group": "Security Operations"
+}

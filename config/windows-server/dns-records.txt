@@ -1,0 +1,25 @@
+# Primary Internal DNS Resolution Map Records
+================================================================================
+SOC HOME LAB INTERNAL DNS ZONE MANAGEMENT RECORD
+================================================================================
+Forward Lookup Zone: soclab.local
+Primary Nameserver:  WS2022-DC.soclab.local
+
+[A RECORDS - IPV4 HOST MAPPING]
+--------------------------------------------------------------------------------
+Host Name          | IP Address      | Description
+--------------------------------------------------------------------------------
+WS2022-DC          | 192.168.100.2   | Active Directory Domain Controller / DNS Server
+wazuh-manager      | 192.168.100.100 | Ubuntu Server - SIEM Central Core Engine
+shuffle-soar       | 192.168.100.120 | Security Automation Platform Host
+win10-victim       | 192.168.100.150 | Windows 10 Endpoint (Target Machine)
+kali-attacker      | 192.168.100.200 | Offensive Simulation Platform (Hydra Engine)
+
+[PTR RECORDS - REVERSE LOOKUP ZONE (100.168.192.in-addr.arpa)]
+--------------------------------------------------------------------------------
+IP Pointer         | Target Host     | Status
+--------------------------------------------------------------------------------
+2                  | WS2022-DC.soclab.local          | Active
+100                | wazuh-manager.soclab.local      | Active
+150                | win10-victim.soclab.local       | Active
+================================================================================

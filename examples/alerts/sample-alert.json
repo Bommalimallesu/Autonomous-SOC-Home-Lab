@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-05-26T11:30:45.123+0000",
+  "rule": {
+    "level": 10,
+    "description": "Multiple Windows logon failures (brute force) from the same source IP.",
+    "id": "100089",
+    "firedtimes": 5,
+    "mail": false,
+    "groups": [
+      "windows",
+      "authentication_failed",
+      "bruteforce",
+      "security_event"
+    ]
+  },
+  "agent": {
+    "id": "001",
+    "name": "WIN10-ENDPOINT",
+    "ip": "192.168.100.50"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "id": "1748259045.123456",
+  "full_log": "An account failed to log on. Security Auditing Event ID 4625 generated.",
+  "decoder": {
+    "name": "windows_eventchannel"
+  },
+  "data": {
+    "win": {
+      "system": {
+        "providerName": "Microsoft-Windows-Security-Auditing",
+        "eventID": "4625",
+        "channel": "Security",
+        "computer": "WIN10-ENDPOINT.soclab.local",
+        "severityValue": "AUDIT_FAILURE",
+        "message": "An account failed to log on."
+      },
+      "eventdata": {
+        "targetUserName": "jdoe",
+        "targetDomainName": "SOCLAB",
+        "failureReason": "Unknown user name or bad password",
+        "logonType": "10",
+        "ipAddress": "192.168.100.200",
+        "ipPort": "3389"
+      }
+    }
+  },
+  "location": "EventChannel",
+  "input": {
+    "type": "log"
+  }
+}

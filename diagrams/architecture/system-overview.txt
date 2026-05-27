@@ -1,0 +1,31 @@
+ATTACK LAYER -> DETECTION LAYER -> SIEM MANAGER -> SOAR WEBHOOK -> ITSM TICKETING QUEUE
+================================================================================
+SOC LAB INFRASTRUCTURE & NETWORK OVERVIEW
+================================================================================
+The environment uses a specialized host-only network layout (192.168.100.0/24) 
+to facilitate safe malware analysis, active threat simulation, and automated 
+incident containment strategies.
+
+                [ PUBLIC INTERNET ]
+                        |
+                        v
+               [ WAN / NAT Interface ]
+                        |
+            =========================
+            ||  Virtual Switch     ||  <-- Core Routing & Inter-VLAN Isolation
+            =========================
+                        |
+            [ Private LAN: 192.168.100.0/24 ]
+                        |
+    +-------------------+-------------------+-------------------+
+    |                   |                   |                   |
+[Ubuntu SIEM]     [Win Server DC]      [Win10 Client]     [Kali Attacker]
+192.168.100.100   192.168.100.2        192.168.100.150    192.168.100.200
+(Wazuh Engine)    (Active Directory)   (Target Endpoint)  (Hydra Simulation)
+    |
+    v
+[Shuffle SOAR Platform (Cloud Engine via Webhook API Gateway)]
+    |
+    v
+[ServiceNow Ticketing/ITS (Incident Documentation & Tracking)]
+================================================================================

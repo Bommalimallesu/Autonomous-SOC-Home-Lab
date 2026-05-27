@@ -1,0 +1,43 @@
+# Sensitive Lab Information - NEVER UPLOAD THESE
+# ==============================================================================
+# GitHub Repository Protection Filter Matrix (.gitignore)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. SENSITIVE CREDENTIALS & LOCAL CONFIGURATIONS (CRITICAL SECURITY)
+# ------------------------------------------------------------------------------
+# Blocks the local file where your real passwords and webhook URLs live
+.env
+*.env
+*.secrets
+secrets.json
+auth_tokens.txt
+
+# ------------------------------------------------------------------------------
+# 2. LOCAL TRANSACTION LOGS & SIEM TELEMETRY DATA
+# ------------------------------------------------------------------------------
+# Prevents raw alert logs or incident tracking files from leaking online
+*.log
+shuffle.log
+servicenow.log
+
+# ------------------------------------------------------------------------------
+# 3. PYTHON ENVIRONMENT & COMPILED ARTIFACTS
+# ------------------------------------------------------------------------------
+# Keeps your repository clean of automated python cache folders
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Python Virtual Environments
+.venv/
+venv/
+env/
+
+# ------------------------------------------------------------------------------
+# 4. OPERATING SYSTEM TEMPORARY FILES
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp

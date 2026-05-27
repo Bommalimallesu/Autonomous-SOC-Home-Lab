@@ -1,0 +1,75 @@
+May 23 15:18:47 victim-endpoint Microsoft-Windows-Security-Auditing[4625]: Logon Failure
+# ==============================================================================
+# SOC LAB RAW TELEMENTRY SAMPLES: RDP BRUTE FORCE ATTACK VARIATIONS
+# Target Host: victim-endpoint | Attacker IP: 192.168.100.200
+# Attack Type: Password Guessing / Credential Spraying via RDP (Logon Type 10)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# FORMAT 1: STANDARD WINDOWS SYSLOG-STYLE STRINGS (For basic regex parsing)
+# ------------------------------------------------------------------------------
+May 23 15:18:47 victim-endpoint Microsoft-Windows-Security-Auditing[4625]: Logon Failure – Account: Administrator, Source IP: 192.168.100.200, Logon Type: 10 (RemoteInteractive)
+May 23 15:18:48 victim-endpoint Microsoft-Windows-Security-Auditing[4625]: Logon Failure – Account: admin, Source IP: 192.168.100.200, Logon Type: 10
+May 23 15:18:49 victim-endpoint Microsoft-Windows-Security-Auditing[4625]: Logon Failure – Account: jdoe, Source IP: 192.168.100.200, Logon Type: 10
+May 23 15:18:50 victim-endpoint Microsoft-Windows-Security-Auditing[4625]: Logon Failure – Account: user, Source IP: 192.168.100.200, Logon Type: 10
+May 23 15:18:51 victim-endpoint Microsoft-Windows-Security-Auditing[4625]: Logon Failure – Account: test, Source IP: 192.168.100.200, Logon Type: 10
+
+# ------------------------------------------------------------------------------
+# FORMAT 2: WAZUH JSON ALERTS-STYLE (Simulating SIEM engine output)
+# ------------------------------------------------------------------------------
+{"timestamp":"2026-05-23T15:18:52.002Z","agent":{"id":"002","name":"victim-endpoint","ip":"192.168.100.50"},"manager":{"name":"ubuntu-siem"},"data":{"win":{"system":{"providerName":"Microsoft-Windows-Security-Auditing","eventID":"4625","channel":"Security","severityValue":"AUDIT_FAILURE"},"eventdata":{"targetUserName":"guest","logonType":"10","ipAddress":"192.168.100.200"}}},"rule":{"id":"60122","level":5,"description":"Windows Logon Failure","mitre":{"id":["T1110.001"],"tactic":["Credential Access"],"technique":["Brute Force"]}}}
+{"timestamp":"2026-05-23T15:18:53.015Z","agent":{"id":"002","name":"victim-endpoint","ip":"192.168.100.50"},"manager":{"name":"ubuntu-siem"},"data":{"win":{"system":{"providerName":"Microsoft-Windows-Security-Auditing","eventID":"4625","channel":"Security","severityValue":"AUDIT_FAILURE"},"eventdata":{"targetUserName":"support","logonType":"10","ipAddress":"192.168.100.200"}}},"rule":{"id":"60122","level":5,"description":"Windows Logon Failure","mitre":{"id":["T1110.001"],"tactic":["Credential Access"]}}}
+
+# ------------------------------------------------------------------------------
+# FORMAT 3: FLAT KEY-VALUE PAIRS (Wazuh single-line log style)
+# ------------------------------------------------------------------------------
+TIMESTAMP: May 23, 2026 @ 15:18:54.000 input.type:log agent.name:victim-endpoint data.win.system.eventID:4625 data.win.system.channel:Security data.win.system.severityValue:AUDIT_FAILURE data.win.eventdata.targetUserName:backup data.win.eventdata.logonType:10 data.win.eventdata.ipAddress:192.168.100.200 data.win.system.message:"An account failed to log on."
+TIMESTAMP: May 23, 2026 @ 15:18:55.000 input.type:log agent.name:victim-endpoint data.win.system.eventID:4625 data.win.system.channel:Security data.win.system.severityValue:AUDIT_FAILURE data.win.eventdata.targetUserName:oracle data.win.eventdata.logonType:10 data.win.eventdata.ipAddress:192.168.100.200 data.win.system.message:"An account failed to log on."
+
+# ------------------------------------------------------------------------------
+# FORMAT 4: EXTENDED EVENT VIEWER DESCRIPTION TEXT (Raw Windows XML/Event style)
+# ------------------------------------------------------------------------------
+---
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          5/23/2026 3:19:32 PM
+Event ID:      4625
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Failure
+User:          N/A
+Computer:      victim-endpoint.soclab.local
+Description:
+An account failed to log on.
+
+Subject:
+	Security ID:		S-1-5-18
+	Account Name:		victim-endpoint$
+
+Logon Type:			10 (RemoteInteractive)
+
+Account For Which Logon Failed:
+	Account Name:		root
+	Account Domain:		victim-endpoint
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	victim-endpoint
+	Source Network Address:	192.168.100.200
+	Source Port:		61432
+---
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          5/23/2026 3:19:35 PM
+Event ID:      4625
+Keywords:      Audit Failure
+Computer:      victim-endpoint.soclab.local
+Description:
+An account failed to log on.
+	Account Name:		system
+	Logon Type:			10
+	Source Network Address:	192.168.100.200

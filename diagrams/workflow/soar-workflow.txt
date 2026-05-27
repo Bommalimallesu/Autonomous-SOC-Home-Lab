@@ -1,0 +1,178 @@
+Ingest Webhook Alert -> Parse Source IP -> Threat Intel Enrichment Match -> Log Escalation Incident Ticket
+================================================================================
+                SOAR AUTOMATION WORKFLOW – INCIDENT RESPONSE
+================================================================================
+
+PROJECT:
+Automated SOC Home Lab Using Wazuh, Shuffle, and ServiceNow
+
+PURPOSE:
+This workflow demonstrates automated threat detection, enrichment,
+containment, ticketing, and notification within a SOC environment.
+The automation reduces analyst workload and improves Mean Time to Respond (MTTR)
+during brute-force and malicious authentication attacks.
+
+================================================================================
+                         HIGH-LEVEL WORKFLOW OVERVIEW
+================================================================================
+
++------------------------------------------------------------------------+
+|                        1. THREAT DETECTION (WAZUH)                     |
+|------------------------------------------------------------------------|
+| • Kali Linux launches Hydra RDP brute-force attack                     |
+| • Windows endpoint generates Event ID 4625 failed logon events         |
+| • Wazuh agent forwards logs to Wazuh Manager                           |
+| • Wazuh correlation rules detect suspicious authentication activity    |
+| • Critical alert triggered (Rule ID: 5715 / 60204)                    |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                    2. ALERT FORWARDING & INTEGRATION                   |
+|------------------------------------------------------------------------|
+| • Wazuh executes custom integration script                             |
+| • Script Path: /var/ossec/integrations/custom-shuffle.py               |
+| • Alert JSON parsed and formatted                                      |
+| • HTTP POST request sent to Shuffle Webhook endpoint                   |
+| • Payload includes:                                                    |
+|      - Source IP Address                                               |
+|      - Target Hostname                                                 |
+|      - Username                                                        |
+|      - Rule Description                                                |
+|      - Alert Severity                                                  |
+|      - Timestamp                                                       |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                        3. SHUFFLE SOAR AUTOMATION                      |
+|------------------------------------------------------------------------|
+| • Shuffle webhook receives Wazuh alert                                 |
+| • Workflow "Wazuh_to_ServiceNow_Automation" triggered                  |
+| • SOAR parses indicators and enriches alert data                       |
+| • Automated orchestration pipeline begins                              |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                           4. THREAT ENRICHMENT                         |
+|------------------------------------------------------------------------|
+| • Query VirusTotal API for IP reputation                               |
+| • Validate IOC risk score and malicious activity                       |
+| • Check Active Directory account status                                |
+| • Identify compromised user accounts                                   |
+| • Gather contextual investigation data                                 |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                    5. DECISION & CONDITIONAL LOGIC                     |
+|------------------------------------------------------------------------|
+| IF Reputation Score == MALICIOUS or HIGH RISK:                         |
+|      → Proceed to automated containment                                |
+|                                                                        |
+| ELSE:                                                                  |
+|      → Escalate incident to Tier-1 Analyst                             |
+|      → Manual investigation required                                   |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                     6. AUTOMATED THREAT CONTAINMENT                    |
+|------------------------------------------------------------------------|
+| • Execute PowerShell firewall rule on target endpoint                  |
+|                                                                        |
+|   New-NetFirewallRule                                                  |
+|   -DisplayName "Block-Attacker-IP"                                     |
+|   -RemoteAddress <Source_IP>                                           |
+|   -Action Block                                                        |
+|                                                                        |
+| • Disable compromised Active Directory account                         |
+| • Prevent further lateral movement                                     |
+| • Isolate malicious source activity                                    |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                    7. SERVICENOW INCIDENT CREATION                     |
+|------------------------------------------------------------------------|
+| • Shuffle sends POST request to ServiceNow REST API                    |
+| • Endpoint: /api/now/table/incident                                    |
+| • Authentication using admin/API credentials                           |
+|                                                                        |
+| Payload Fields:                                                        |
+|   - short_description                                                  |
+|   - description                                                        |
+|   - impact                                                             |
+|   - urgency                                                            |
+|   - correlation_id                                                     |
+|   - action_taken                                                       |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                        8. INCIDENT RESPONSE OUTPUT                     |
+|------------------------------------------------------------------------|
+| • ServiceNow returns HTTP 201 Created                                  |
+| • Incident generated successfully                                      |
+| • Example Ticket: INC0010100                                           |
+| • Incident visible in SOC dashboard                                    |
+| • Full audit trail preserved                                           |
++-----------------------------------+------------------------------------+
+                                    │
+                                    ▼
++------------------------------------------------------------------------+
+|                    9. SOC TEAM NOTIFICATION                            |
+|------------------------------------------------------------------------|
+| • Alert forwarded to Slack / Microsoft Teams                           |
+| • Notification includes:                                               |
+|      - Incident Number                                                 |
+|      - Source IP                                                       |
+|      - Target Host                                                     |
+|      - Severity Level                                                  |
+|      - Containment Status                                              |
+|      - ServiceNow Ticket Link                                          |
++------------------------------------------------------------------------+
+
+================================================================================
+                              DATA FLOW MAPPING
+================================================================================
+
+Wazuh Alert JSON                     →      ServiceNow Incident Fields
+--------------------------------------------------------------------------------
+rule.description                     →      short_description
+full_log                             →      description
+rule.level                           →      impact / urgency
+agent.name                           →      affected_host
+srcip                                →      attacker_ip
+timestamp                            →      incident_time
+
+================================================================================
+                             SECURITY AUTOMATION STACK
+================================================================================
+
++----------------------+-------------------------------------------------+
+| COMPONENT            | PURPOSE                                         |
++----------------------+-------------------------------------------------+
+| Wazuh SIEM           | Threat detection and log correlation            |
+| Shuffle SOAR         | Security orchestration and automation           |
+| ServiceNow           | Incident management and ticketing               |
+| pfSense Firewall     | Network segmentation and traffic control        |
+| Windows Server AD    | Identity and access management                  |
+| Kali Linux           | Attack simulation and penetration testing       |
+| PowerShell           | Automated endpoint containment                  |
++----------------------+-------------------------------------------------+
+
+================================================================================
+                               PROJECT OUTCOME
+================================================================================
+
+• Reduced Mean Time to Respond (MTTR)
+• Automated brute-force attack response
+• Centralized SIEM and SOAR integration
+• Real-time incident creation and tracking
+• Improved SOC operational efficiency
+• Enterprise-style Blue Team workflow simulation
+• Real-world cybersecurity automation implementation
+
+================================================================================
