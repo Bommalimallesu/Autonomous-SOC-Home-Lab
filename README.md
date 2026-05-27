@@ -20,59 +20,94 @@ This repository contains a modular, virtualized Security Operations Center (SOC)
 [**Read the full Architecture Design**](docs/architecture/system-design.md)
 
 ```mermaid
-flowchart LR
+flowchart TB
 
-    %% Attack Source
-    A["🛑 Kali Linux Attacker<br>192.168.100.200"]
-
-    %% Endpoint
-    B["💻 Windows 10 Endpoint<br>192.168.100.50<br>Sysmon + Wazuh Agent"]
-
-    %% SIEM Layer
-    C["📡 Wazuh Agent"]
-    D["🛡️ Wazuh SIEM Manager<br>192.168.100.100"]
-
-    %% Detection
-    E["🚨 Critical Detection Alert<br>Rule ID: 100089"]
-
-    %% SOAR
-    F["⚙️ Shuffle SOAR"]
-
-    %% ITSM
-    G["📋 ServiceNow Incident"]
-
-    %% Infrastructure
-    subgraph LAB["🔐 Isolated SOC Lab Network"]
-        H["🔥 pfSense Firewall<br>192.168.100.1"]
-        I["🖥️ Windows Server 2022<br>Active Directory"]
+    %% =========================
+    %% ATTACK LAYER
+    %% =========================
+    subgraph ATTACK["🛑 Attack Simulation Layer"]
+        A["Kali Linux Attacker"]
     end
 
-    %% Attack Flow
-    A -->|"RDP Brute Force<br>T1110"| B
+    %% =========================
+    %% ENDPOINT LAYER
+    %% =========================
+    subgraph ENDPOINT["💻 Endpoint Monitoring Layer"]
+        B["Windows 10 Endpoint"]
+        C["Sysmon + Wazuh Agent"]
+    end
 
-    %% Telemetry Flow
-    B -->|"Sysmon Event ID 4625"| C
-    C -->|"Secure Log Forwarding<br>TCP 1514"| D
+    %% =========================
+    %% SIEM LAYER
+    %% =========================
+    subgraph SIEM["🛡️ SIEM & Detection Layer"]
+        D["Wazuh SIEM Manager"]
+        E["Custom Detection Rules"]
+        F["Critical Security Alert"]
+    end
 
-    %% Detection Flow
-    D -->|"Custom Correlation Rules"| E
+    %% =========================
+    %% AUTOMATION LAYER
+    %% =========================
+    subgraph SOAR["⚙️ SOAR Automation Layer"]
+        G["Shuffle SOAR"]
+        H["Webhook Automation"]
+    end
 
-    %% Automation Flow
-    E -->|"HTTPS Webhook"| F
-    F -->|"REST API Integration"| G
+    %% =========================
+    %% INCIDENT RESPONSE
+    %% =========================
+    subgraph IR["📋 Incident Response Layer"]
+        I["ServiceNow Incident"]
+    end
 
-    %% Styling
-    style A fill:#ff4d4d,stroke:#ffffff,color:#ffffff
-    style B fill:#1f2937,stroke:#ffffff,color:#ffffff
-    style C fill:#2563eb,stroke:#ffffff,color:#ffffff
-    style D fill:#4da6ff,stroke:#ffffff,color:#ffffff
-    style E fill:#ffcc00,stroke:#333333,color:#000000
-    style F fill:#7c3aed,stroke:#ffffff,color:#ffffff
-    style G fill:#00cc88,stroke:#ffffff,color:#ffffff
-    style H fill:#f97316,stroke:#ffffff,color:#ffffff
-    style I fill:#374151,stroke:#ffffff,color:#ffffff
+    %% =========================
+    %% INFRASTRUCTURE
+    %% =========================
+    subgraph INFRA["🔐 SOC Infrastructure"]
+        J["pfSense Firewall"]
+        K["Windows Server 2022 AD"]
+    end
+
+    %% =========================
+    %% ATTACK FLOW
+    %% =========================
+    A -->|"RDP Brute Force"| B
+
+    %% =========================
+    %% TELEMETRY FLOW
+    %% =========================
+    B --> C
+    C -->|"Event ID 4625"| D
+
+    %% =========================
+    %% DETECTION FLOW
+    %% =========================
+    D --> E
+    E --> F
+
+    %% =========================
+    %% AUTOMATION FLOW
+    %% =========================
+    F -->|"HTTPS Webhook"| G
+    G --> H
+    H -->|"REST API"| I
+
+    %% =========================
+    %% STYLING
+    %% =========================
+    style A fill:#ff4d4d,color:#ffffff,stroke:#ffffff
+    style B fill:#1f2937,color:#ffffff,stroke:#ffffff
+    style C fill:#2563eb,color:#ffffff,stroke:#ffffff
+    style D fill:#4da6ff,color:#ffffff,stroke:#ffffff
+    style E fill:#7c3aed,color:#ffffff,stroke:#ffffff
+    style F fill:#ffcc00,color:#000000,stroke:#333333
+    style G fill:#9333ea,color:#ffffff,stroke:#ffffff
+    style H fill:#6366f1,color:#ffffff,stroke:#ffffff
+    style I fill:#00cc88,color:#ffffff,stroke:#ffffff
+    style J fill:#f97316,color:#ffffff,stroke:#ffffff
+    style K fill:#374151,color:#ffffff,stroke:#ffffff
 ```
-
 📋 Prerequisites
 
 Before deploying the lab, ensure your host environment meets these requirements:
