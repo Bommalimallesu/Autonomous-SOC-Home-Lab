@@ -101,29 +101,47 @@ Before deploying the lab, ensure your host environment meets these requirements:
 - Hypervisor: VMware Workstation Pro/Player or VirtualBox
 - Network: Support for Custom Host-Only Network Adapters
 
-🚀 Getting Started
+## 🚀 Getting Started
 
-1. Clone the Repository
+### 1️⃣ Clone the Repository
 
-git clone [https://github.com/Bommalimallesu/Autonomous SOC Home Lab.git](https://github.com/Bommalimallesu/Autonomous SOC Home Lab.git)
-cd Autonomous SOC Home Lab
+```bash
+git clone https://github.com/Bommalimallesu/Autonomous-SOC-Home-Lab.git
 
-2. Environment Configuration (Security)
+cd Autonomous-SOC-Home-Lab
+```
 
-#Create your local environment file from the template
+---
+
+### 2️⃣ Environment Configuration (Security)
+
+Create your local environment configuration file from the template:
+
+```bash
 cp config/servicenow/.env.example config/servicenow/.env
+```
 
-#Edit .env with your actual API credentials.
-#WARNING: Ensure .env is added to your .gitignore. Never push this file!
+Edit the `.env` file and add your actual API credentials.
 
-3. Execution & Deployment
+> ⚠️ **Security Warning:**  
+> Ensure `.env` is included in `.gitignore`.  
+> Never expose or push sensitive credentials to GitHub.
 
-#Make the deployment script executable
+---
+
+### 3️⃣ Deployment & Execution
+
+Make the deployment script executable:
+
+```bash
 chmod +x scripts/automation/deploy-wazuh.sh
+```
 
-#Run the deployment
+Run the automated deployment script:
+
+```bash
 sudo bash scripts/automation/deploy-wazuh.sh
-
+```
 🚀 Key Features
 
 1. Fully isolated network using pfSense and VMware Host-Only
