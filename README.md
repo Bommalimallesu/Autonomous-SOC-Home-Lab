@@ -271,12 +271,12 @@ Automated ServiceNow Incident
 - Security Tool Integration & Log Correlation
 - Blue Team Operations & Threat Monitoring
 
-🤖 Future Enhancements
+## 🤖 Future Enhancements
 
-1. Sigma Rule Integration
-2. Active Response & Automated Containment
-3. Threat Intelligence Enrichment
-4. Advanced Analytics & Visualizations
+- Sigma Rule Integration for Advanced Detection Engineering
+- Active Response & Automated Threat Containment
+- Threat Intelligence Enrichment & IOC Correlation
+- Advanced Security Analytics & Visualization Dashboards
 
 👤 Author
 🧑‍💻 Bommali Mallesu
