@@ -142,14 +142,14 @@ Run the automated deployment script:
 ```bash
 sudo bash scripts/automation/deploy-wazuh.sh
 ```
-🚀 Key Features
+## ✨ Key Features
 
-1. Fully isolated network using pfSense and VMware Host-Only
-2. Automated detection and response pipeline
-3. Custom Wazuh detection rules with MITRE ATT&CK mapping
-4. Zero-touch incident creation in ServiceNow via Shuffle SOAR
-5. Comprehensive documentation and testing framework
-6. Production-grade security practices (no hardcoded secrets)
+-  Fully Isolated Network using pfSense and VMware Host-Only
+-  Automated Detection & Incident Response Pipeline
+-  Custom Wazuh Detection Rules with MITRE ATT&CK Mapping
+-  Zero-Touch ServiceNow Incident Creation via Shuffle SOAR
+-  Comprehensive Documentation & Testing Framework
+-  Production-Grade Security Practices (No Hardcoded Secrets)
 
 🚀 Detection & Response Workflow
 
