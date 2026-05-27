@@ -262,14 +262,14 @@ Shuffle SOAR Automation
 Automated ServiceNow Incident
 ```
 
-🧠 Skills Demonstrated
+## 🧠 Skills Demonstrated
 
-1. Enterprise SOC Architecture
-2. SIEM Administration & Detection Engineering
-3. SOAR Automation & Orchestration
-4. Incident Response Automation
-5. Security Tool Integration
-6. Blue Team Operations
+- Enterprise SOC Architecture Design
+- SIEM Administration & Detection Engineering
+- SOAR Automation & Security Orchestration
+- Incident Response Automation
+- Security Tool Integration & Log Correlation
+- Blue Team Operations & Threat Monitoring
 
 🤖 Future Enhancements
 
