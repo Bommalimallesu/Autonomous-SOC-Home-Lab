@@ -163,15 +163,15 @@ This SOC pipeline prioritizes high-fidelity alerting through an automated and st
 
 -  **Response:** ServiceNow automatically generates incident tickets for security operations tracking and response.
 
-🛠️ Technology Stack
+## 🛠️ Technology Stack
 
 | Component | Technology | Role |
-| :--- | :--- | :--- |
-| **SIEM** | Wazuh | Log Ingestion, Correlation, & XDR |
-| **SOAR** | Shuffle | Workflow Automation & Orchestration |
-| **ITSM** | ServiceNow | Incident Management |
-| **Network** | pfSense | Perimeter Security & Segmentation |
-| **Telemetry** | Sysmon | Advanced Windows Monitoring |
+|------------|------------|------|
+| SIEM | Wazuh | Log Ingestion, Correlation, and XDR |
+| SOAR | Shuffle | Workflow Automation and Orchestration |
+| ITSM | ServiceNow | Incident Management |
+| Network | pfSense | Perimeter Security and Network Segmentation |
+| Telemetry | Sysmon | Advanced Windows Endpoint Monitoring |
 
 ## 📁 Project Structure
 
