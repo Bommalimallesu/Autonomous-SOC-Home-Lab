@@ -21,37 +21,36 @@ This repository contains a modular, virtualized Security Operations Center (SOC)
 
 ```mermaid
 flowchart TD
+
     %% Attack Layer
-    A[Kali Linux Attacker<br/>192.168.100.200] 
-    -->|RDP Brute Force Attack<br/>MITRE ATT&CK T1110| 
-    B[Windows 10 Victim Endpoint<br/>192.168.100.50<br/>Sysmon + Wazuh Agent]
-    
+    A["Kali Linux Attacker<br>192.168.100.200"]
+    -->|"RDP Brute Force Attack - MITRE ATT&CK T1110"|
+    B["Windows 10 Victim Endpoint<br>192.168.100.50<br>Sysmon + Wazuh Agent"]
+
     %% Telemetry Flow
-    B -->|Security Event ID 4625 + Sysmon Telemetry| 
-    C[Wazuh Agent]
-    C -->|Secure Forwarding<br/>TCP 1514| 
-    D[Wazuh SIEM Manager<br/>192.168.100.100]
-    D -->|Custom Correlation Rules| 
-    E[Level 10 Critical Alert<br/>Rule 100089 - Brute Force]
-    
+    B -->|"Security Event ID 4625 + Sysmon Telemetry"| C["Wazuh Agent"]
+
+    C -->|"Secure Forwarding TCP 1514"| D["Wazuh SIEM Manager<br>192.168.100.100"]
+
+    D -->|"Custom Correlation Rules"| E["Level 10 Critical Alert<br>Rule 100089"]
+
     %% Automation Flow
-    E -->|HTTPS Webhook| 
-    F[Shuffle SOAR<br/>Automation Engine]
-    F -->|REST API Call| 
-    G[ServiceNow ITSM<br/>Automated Incident Creation]
-    
+    E -->|"HTTPS Webhook"| F["Shuffle SOAR<br>Automation Engine"]
+
+    F -->|"REST API Call"| G["ServiceNow ITSM<br>Automated Incident Creation"]
+
     %% Infrastructure
     subgraph "Isolated Lab Network - 192.168.100.0/24"
-        H[pfSense Firewall<br/>192.168.100.1]
-        I[Windows Server 2022 DC + AD<br/>192.168.100.2]
+        H["pfSense Firewall<br>192.168.100.1"]
+        I["Windows Server 2022 DC + AD<br>192.168.100.2"]
     end
-    
-    %% Styling
-    style A fill:#ff4d4d,stroke:#fff,color:#fff
-    style G fill:#00cc88,stroke:#fff,color:#fff
-    style E fill:#ffcc00,stroke:#333,color:#000
-    style D fill:#4da6ff,stroke:#fff,color:#fff
 
+    %% Styling
+    style A fill:#ff4d4d,stroke:#ffffff,color:#ffffff
+    style D fill:#4da6ff,stroke:#ffffff,color:#ffffff
+    style E fill:#ffcc00,stroke:#333333,color:#000000
+    style G fill:#00cc88,stroke:#ffffff,color:#ffffff
+```
 📋 Prerequisites
 
 Before deploying the lab, ensure your host environment meets these requirements:
