@@ -151,17 +151,17 @@ sudo bash scripts/automation/deploy-wazuh.sh
 -  Comprehensive Documentation & Testing Framework
 -  Production-Grade Security Practices (No Hardcoded Secrets)
 
-🚀 Detection & Response Workflow
+## 🔄 Detection & Response Workflow
 
-We prioritize high-fidelity alerting through a standardized, automated pipeline:
+This SOC pipeline prioritizes high-fidelity alerting through an automated and standardized detection workflow:
 
-1. Ingestion: Endpoint (Sysmon/WinEvent) telemetry is captured via the Wazuh agent.
+-  **Ingestion:** Endpoint telemetry (Sysmon & Windows Event Logs) is collected through the Wazuh Agent.
 
-2. Detection: Wazuh Manager correlates logs against MITRE ATT&CK aligned rules.
+-  **Detection:** Wazuh Manager correlates events using custom MITRE ATT&CK-aligned detection rules.
 
-3. Orchestration: Shuffle consumes the alert payload via Webhook.
+-  **Orchestration:** Shuffle SOAR processes alert payloads through automated webhook workflows.
 
-4. Response: Automated incident ticket generation in ServiceNow.
+-  **Response:** ServiceNow automatically generates incident tickets for security operations tracking and response.
 
 🛠️ Technology Stack
 
