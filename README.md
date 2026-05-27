@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # SOC Home Lab: Production-Grade Security Operations Center
 # 🛡️ SOC Operations Lab (SOL) Home Lab
 *Enterprise-Grade Automated Security Operations Center & Incident Response Pipeline*
