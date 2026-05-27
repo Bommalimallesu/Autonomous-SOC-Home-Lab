@@ -278,10 +278,18 @@ Automated ServiceNow Incident
 - Threat Intelligence Enrichment & IOC Correlation
 - Advanced Security Analytics & Visualization Dashboards
 
-👤 Author
-🧑‍💻 Bommali Mallesu
-🛡️ 🧑‍💻 Cybersecurity Engineer | SOC Analyst | SIEM & SOAR Automation Developer
-📍 SOC Home Lab Project Maintainer
-📅 Last Updated: May 26, 2026
+---
 
-This laboratory environment demonstrates real-world enterprise SOC capabilities with production-grade standards and security best practices.
+## 👤 Author
+
+### 🧑‍💻 Bommali Mallesu
+
+**Cybersecurity Engineer | SOC Analyst | SIEM & SOAR Automation Developer**
+
+- 🔐 SOC Home Lab Project Maintainer
+- 🛡️ Focused on Detection Engineering, Security Automation, and Blue Team Operations
+- 📅 Last Updated: May 26, 2026
+
+---
+
+> This project demonstrates enterprise-grade SOC operations, automated incident response workflows, and production-oriented cybersecurity engineering practices.
