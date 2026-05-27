@@ -35,6 +35,7 @@ flowchart TD
     style D fill:#4da6ff,stroke:#fff,color:#fff
     style E fill:#ffcc00,stroke:#333,color:#000
     style G fill:#00cc88,stroke:#fff,color:#fff
+```
 
 📋 Prerequisites
 
